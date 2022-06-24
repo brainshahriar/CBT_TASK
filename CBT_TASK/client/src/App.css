@@ -1,0 +1,43 @@
+.add_btn{
+  text-align: right;
+}
+
+.container{
+  overflow: auto;
+}
+
+.left_view h3{
+  font-size: 21px;
+}
+
+.left_view p{
+  font-weight: 600;
+}
+
+.left_view span{
+  font-weight: 400;
+}
+
+.right_view p{
+  font-weight: 600;
+}
+
+
+.right_view span{
+  font-weight: 400;
+}
+.image-div{
+  width: 200px;
+  height: 150px;
+  border: 1px dashed lightgray;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.previewImg{
+  width: 200px;
+  height: 150px;
+  border-radius: 8px;
+}
