@@ -22,6 +22,7 @@ const userSchema = new mongoose.Schema({
                 question_body: { type: String },
                 remarks: { type: String },
                 answer: { type: String },
+                mark:{type:String},
                 options: [
                   {
                     type: String,

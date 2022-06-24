@@ -52,6 +52,7 @@ const QuestionSet: React.FC = () => {
     isFromQuestionBank: "",
     question_body: "",
     remarks: "",
+    mark:"",
     answer: "",
     option: [],
   });
@@ -108,6 +109,7 @@ const QuestionSet: React.FC = () => {
       isFromQuestionBank: "",
       question_body: "",
       remarks: "",
+      mark:"",
       answer: "",
       option: [],
     });
@@ -134,9 +136,13 @@ const QuestionSet: React.FC = () => {
     navigate("/home");
   };
 
+
+  const [marks,setMarks]=useState<any>({})
+  
+
   const handleQuestionBank = (question: any) => {
     const { _id, ...rest } = question;
-    const newObject = { ...rest, bank_id: _id, isFromQuestionBank: _id };
+    const newObject = { ...rest, bank_id: _id, isFromQuestionBank: _id,mark:marks};
     const newQuesArr = [...questionArray, newObject];
     setQuestionArray(newQuesArr);
   };
@@ -298,6 +304,15 @@ const QuestionSet: React.FC = () => {
                       onChange={handleQuestionData}
                     />
                   </div>
+                  <div className="mb-3 col-lg-6 col-md-6 col-12">
+                    <label className="form-label">Marks</label>
+                    <input
+                      type="text"
+                      name="mark"
+                      className="form-control"
+                      onChange={handleQuestionData}
+                    />
+                  </div>
 
                   <div className="mb-3 col-lg-12 col-md-12 col-12">
                     <label className="form-label">Question Title</label>
@@ -427,6 +442,7 @@ const QuestionSet: React.FC = () => {
                   <tr className="table-dark">
                     <th scope="col">id</th>
                     <th scope="col">Title</th>
+                    <th scope="col">Mark</th>
                     <th scope="col">Action</th>
                   </tr>
                 </thead>
@@ -438,6 +454,7 @@ const QuestionSet: React.FC = () => {
                           <th scope="row">{id + 1}</th>
                           <td>{element.question_body}</td>
                           <td className="d-flex justify-content-between">
+                            <input type="text" name="mark" onChange={(e:any)=>setMarks(e.target.value)}/>
                             <button
                               className="btn btn-danger"
                               onClick={() => handleQuestionBank(element)}

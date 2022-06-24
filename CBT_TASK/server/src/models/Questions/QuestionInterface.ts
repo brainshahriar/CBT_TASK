@@ -9,6 +9,7 @@ export default interface Question extends Document{
     question_used_count:number,
     question_body:string,
     remarks:string,
+    mark:string,
     answer:string,
     options:object,
 }
