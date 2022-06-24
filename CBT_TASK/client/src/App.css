@@ -1,32 +1,75 @@
-.add_btn{
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.formclass {
+  margin-left: 15px;
+  border: 1px solid black;
+}
+
+.formclass .row,
+.addtable {
+  padding: 5px;
+}
+
+.select {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.markfield {
+  padding: 0 !important;
+  height: 25px;
+  width: 60px;
+}
+
+
+
+.tableclass tbody tr td {
+  padding: 0 !important;
+  ;
+}
+
+
+/* 
+.tableclass thead tr th {
+padding: 0 !important;
+align-items: center;
+} */
+
+.setform {
+  border: 1px solid black;
+  padding: 5px;
+}
+
+.add_btn {
   text-align: right;
 }
 
-.container{
-  overflow: auto;
-}
-
-.left_view h3{
+.left_view h3 {
   font-size: 21px;
 }
 
-.left_view p{
+.left_view p {
   font-weight: 600;
 }
 
-.left_view span{
+.left_view span {
   font-weight: 400;
 }
 
-.right_view p{
+.right_view p {
   font-weight: 600;
 }
 
-
-.right_view span{
+.right_view span {
   font-weight: 400;
 }
-.image-div{
+
+.image-div {
   width: 200px;
   height: 150px;
   border: 1px dashed lightgray;
@@ -36,7 +79,8 @@
   align-items: center;
   cursor: pointer;
 }
-.previewImg{
+
+.previewImg {
   width: 200px;
   height: 150px;
   border-radius: 8px;
