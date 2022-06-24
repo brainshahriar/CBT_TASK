@@ -454,7 +454,7 @@ const QuestionSet: React.FC = () => {
                           <th scope="row">{id + 1}</th>
                           <td>{element.question_body}</td>
                           <td className="d-flex justify-content-between">
-                            <input type="text" name="mark" onChange={(e:any)=>setMarks(e.target.value)}/>
+                            <input placeholder="Enter Marks" type="text" name="mark"  onChange={(e:any)=>setMarks(e.target.value)}/>
                             <button
                               className="btn btn-danger"
                               onClick={() => handleQuestionBank(element)}
