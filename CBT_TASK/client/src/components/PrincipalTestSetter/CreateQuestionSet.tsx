@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import Navbar from "./Navbar";
+import Navbar from "../Navbar";
 import { Button, Modal } from "react-bootstrap";
 import axios from "axios";
-const QuestionSet: React.FC = () => {
-  //get All Question
 
-  const [bankData, setbankData] = useState<any[]>([]);
+const CreateQuestionSet:React.FC = () => {
+
+    const [bankData, setbankData] = useState<any[]>([]);
 
   const [selectedData, setSelectedData] = useState<any>("all");
 
@@ -38,7 +38,6 @@ const QuestionSet: React.FC = () => {
 
   const [postValue, setValue] = useState<any>({
     name: "",
-    deadline: "",
     technology: "",
     job_rank: "",
     difficulty: "",
@@ -101,7 +100,7 @@ const QuestionSet: React.FC = () => {
     const newQuestion = { ...questionValue };
     newQuestion.options = optionValue;
     setQuestionArray([...questionArray, newQuestion]);
-    setQuestionValue({
+    setQuestionValue({ 
       technology: "",
       question_type: "",
       job_rank: "",
@@ -121,7 +120,6 @@ const QuestionSet: React.FC = () => {
     e.preventDefault();
     const data: any = {
       name: postValue.name,
-      deadline: postValue.deadline,
       technology: postValue.technology,
       job_rank: postValue.job_rank,
       difficulty: postValue.difficulty,
@@ -156,10 +154,9 @@ const QuestionSet: React.FC = () => {
     //   console.log(newQuesArr);
     setQuestionArray(newQuesArr);
   };
-
-  return (
-    <>
-      <div className="main">
+    return (
+            <>
+                  <div className="main">
         <Navbar />
         <div className="content">
           <div className="col-12 row">
@@ -176,15 +173,6 @@ const QuestionSet: React.FC = () => {
                         placeholder="Enter Set Name"
                         type="text"
                         name="name"
-                        className="form-control"
-                        onChange={handleData}
-                      />
-                    </div>
-                    <div className="mb-3 col-lg-6 col-md-6 col-12">
-                      <label className="form-label">Deadline</label>
-                      <input
-                        type="date"
-                        name="deadline"
                         className="form-control"
                         onChange={handleData}
                       />
@@ -424,6 +412,7 @@ const QuestionSet: React.FC = () => {
               </div>
             </div>
 
+
             <div className="col-6 mt-2">
               <div className="select mb-2">
                 <div>
@@ -450,8 +439,11 @@ const QuestionSet: React.FC = () => {
                 <table className="table tableclass">
                   <thead>
                     <tr className="table-dark">
-                      <th scope="col">id</th>
+                      <th scope="col">SL.</th>
                       <th scope="col">Title</th>
+                      <th scope="col">Tech.</th>
+                      <th scope="col">Difficulty</th>
+                      <th scope="col">Rank</th>
                       <th scope="col">Mark</th>
                       <th scope="col">Action</th>
                     </tr>
@@ -463,6 +455,9 @@ const QuestionSet: React.FC = () => {
                           <tr key={id}>
                             <td scope="row">{id + 1}</td>
                             <td>{element.question_body}</td>
+                            <td>{element.technology}</td>
+                            <td>{element.difficulty}</td>
+                            <td>{element.job_rank}</td>
                             <td>
                               <input
                                 type="text"
@@ -474,7 +469,7 @@ const QuestionSet: React.FC = () => {
                             </td>
                             <td>
                               <button
-                                className="btn-danger btn btn-sm"
+                                className="btn-success btn btn-sm"
                                 onClick={() => handleQuestionBank(element)}
                               >
                                 Add
@@ -487,11 +482,14 @@ const QuestionSet: React.FC = () => {
                 </table>
               </div>
             </div>
+
+            
           </div>
+
         </div>
       </div>
-    </>
-  );
+            </>
+    );
 };
 
-export default QuestionSet;
+export default CreateQuestionSet;

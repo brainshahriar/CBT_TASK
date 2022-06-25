@@ -3,7 +3,6 @@ import Set from "./SetInterface";
 
 const userSchema = new mongoose.Schema({
         name: { type: String},
-        deadline: { type: String },
         status:{ type:Boolean,default:true},
         technology: { type: String },
         job_rank: { type: String },

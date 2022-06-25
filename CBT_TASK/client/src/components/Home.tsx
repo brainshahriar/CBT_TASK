@@ -42,12 +42,7 @@ const Home: React.FC = () => {
           <Navbar />
           <div className="add_btn mt-2 mb-2">
             <Link to="/question" className="btn btn-primary">
-              Add Questions
-            </Link>
-          </div>
-          <div className="add_btn mt-2 mb-2">
-            <Link to="/questionset" className="btn btn-primary">
-              Create Question Set
+              Add Questions to Bank
             </Link>
           </div>
           <div className=" d-flex flex-row flex-wrap ">

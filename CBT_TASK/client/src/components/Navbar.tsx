@@ -17,10 +17,21 @@ const Navbar:React.FC = () => {
                             <Link className="navbar-brand" to="/">Home</Link>
                             </li>
                         </ul>
-                        <form className="d-flex">
-                            <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-                            <button className ="btn btn-outline-success" type ="submit">Search</button>
-                        </form>
+                        <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li className="nav-item">
+                            <Link className="navbar-brand btn btn-primary btn-sm" to="/superadmin">As Super Admin</Link>
+                            </li>
+                        </ul>
+                        <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li className="nav-item">
+                            <Link className="navbar-brand btn btn-primary btn-sm" to="/principaltestsetter">As Principal Test Setter</Link>
+                            </li>
+                        </ul>
+                        <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li className="nav-item">
+                            <Link className="navbar-brand btn btn-primary btn-sm" to="/subperson">As Sub Person</Link>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </nav>
