@@ -26,7 +26,9 @@ body {
   width: 60px;
 }
 
-
+.optiondiv {
+  flex-direction: column;
+}
 
 .tableclass tbody tr td {
   padding: 0 !important;
@@ -46,7 +48,7 @@ align-items: center;
 }
 
 .add_btn {
-  text-align: right;
+  margin-left: 5px;
 }
 
 .left_view h3 {

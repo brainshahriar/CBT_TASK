@@ -37,11 +37,10 @@ const Home: React.FC = () => {
 
   return (
     <>
-          <div className="mt-5">
-        <div className="container">
+<div className="">
           <Navbar />
           <div className="add_btn mt-2 mb-2">
-            <Link to="/question" className="btn btn-primary">
+            <Link to="/question" className="btn btn-primary btn-sm">
               Add Questions to Bank
             </Link>
           </div>
@@ -71,8 +70,6 @@ const Home: React.FC = () => {
     }
   </div>
         </div>
-        
-      </div>
     </>
   );
 };

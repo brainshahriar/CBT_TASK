@@ -128,7 +128,7 @@ const CreateQuestionSet: React.FC = () => {
     };
 
     const createTable = async () => {
-      await axios.post("http://localhost:8000/api/set/post", data);
+      await axios.post("http://localhost:8000/api/set/partial/post", data);
     };
     createTable();
     alert("Inserted");

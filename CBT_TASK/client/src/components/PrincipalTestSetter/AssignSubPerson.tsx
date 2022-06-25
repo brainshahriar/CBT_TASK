@@ -8,7 +8,7 @@ const AssignSubPerson: React.FC = () => {
   const handleShow = () => setShow(true);
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
+<Button className="btn btn-sm" onClick={handleShow}>
         Request to Sub-Person
       </Button>
 
