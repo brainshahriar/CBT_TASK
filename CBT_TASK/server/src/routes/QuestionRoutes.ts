@@ -7,9 +7,9 @@ const router = express.Router();
 
 router.post('/post',questionController.questionPost)
 router.get('/getall',questionController.gellAllQuestion)
-router.get('/getbyid/:id',questionController.getbyid)
-
-
+router.get('/getall/:id',questionController.getByid)
+router.put('/update/:id',questionController.update)
+router.delete('/delete/:id',questionController.delete)
 
 
 export default router

@@ -12,9 +12,19 @@ class questionService {
   static getAllQuestionWithQuery = async(query:any)=>{
     return await questionModel.find(query).exec();
   }
-  static getById = async (res: Response, req: Request) => {
-    const id = req.params.id;
-    return await questionModel.findById({ _id: id }).exec();
-  };
+  static getById = async(req:Request,res:Response)=>{
+    const id = req.params.id
+    return await questionModel.findById({_id:id}).exec();
+}
+
+
+static updateQuestion = async (req: Request, res: Response) => {
+  let newUser = req.body;
+  return await questionModel.findByIdAndUpdate(req.params.id, newUser);
+};
+
+  static delete = async(req:Request,res:Response)=>{
+    return await questionModel.findByIdAndDelete(req.params.id);
+  }
 }
 export default questionService;

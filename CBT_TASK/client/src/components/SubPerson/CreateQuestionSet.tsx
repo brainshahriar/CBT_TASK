@@ -325,24 +325,30 @@ const CreateQuestionSet: React.FC = () => {
                             rows={5}
                           ></textarea>
                         </div>
-                        {optionDiv.map((item: any, i: any) => (
-                          <div
-                            key={i}
-                            className="mb-3 col-lg-6 col-md-6 col-12"
-                          >
-                            <label className="form-label">Options</label>
-                            <input
-                              type="text"
-                              name="options"
-                              className="form-control"
-                              onChange={(e) => handleOptionChange(e, i)}
-                            />
-                          </div>
-                        ))}
-                        <p className="btn btn-primary" onClick={handleClick}>
-                          Add Options
-                        </p>
                       </div>
+                      <div className="col-12 row">
+              <div className="d-flex optiondiv col-6">
+                {optionDiv.map((item: any, i: any) => (
+                  <div key={i} className="mb-2 col-lg-12 col-md-12 col-12">
+                    <label className="form-label">Options</label>
+                    <input
+                      type="text"
+                      name="options"
+                      className="form-control"
+                      onChange={(e) => handleOptionChange(e, i)}
+                    />
+                  </div>
+                ))}
+              </div>
+              <div className="col-6" style={{ marginTop: "32px" }}>
+                <p
+                  className="btn btn-primary float-right"
+                  onClick={handleClick}
+                >
+                  Add Options
+                </p>
+              </div>
+            </div>
                     </Modal.Body>
                     <Modal.Footer>
                       <Button variant="secondary" onClick={handleClose}>

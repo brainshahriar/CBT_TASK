@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
-import Navbar from "./Navbar";
+import {useNavigate } from "react-router-dom";
+import Navbar from "../Navbar";
 import axios from "axios";
 
-const Question: React.FC = () => {
+const EditQuestions: React.FC = () => {
   let navigate = useNavigate();
 
   const [postValue, setValue] = useState<any>({
@@ -65,7 +65,7 @@ const Question: React.FC = () => {
 
   return (
     <>
-      <div className="">
+      <div className=""> 
         <Navbar />
         <div className="container">
           <form className="mt-4" id="myform" onSubmit={handleSubmit}>
@@ -191,4 +191,4 @@ const Question: React.FC = () => {
   );
 };
 
-export default Question;
+export default EditQuestions;

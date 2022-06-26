@@ -12,7 +12,8 @@ import {
   Route,
   Routes,
 } from "react-router-dom";
-import Question from './components/Question';
+import Question from './components/QuestionBank/Question';
+import EditQuestions from './components/QuestionBank/EditQuestions';
 
 const App:React.FC = ()=> {
   return (
@@ -23,6 +24,7 @@ const App:React.FC = ()=> {
             <Route  path="/" element={<Home/>}/>
             <Route  path="/home" element={<Home/>}/>
             <Route  path="/question" element={<Question/>}/>
+            <Route  path="/question/edit/:id" element={<EditQuestions/>}/>
             <Route  path="/superadmin" element={<SuperAdminHome/>}/>
             <Route  path="/principaltestsetter" element={<PricipalTestSetterHome/>}/>
             <Route  path="/principaltestsetter/create" element={<PricipalTestSetter/>}/>
