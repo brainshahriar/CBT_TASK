@@ -131,7 +131,7 @@ const CreateQuestionSet:React.FC = () => {
     };
     createTable();
     alert("Inserted");
-    navigate("/home");
+    navigate("/principaltestsetter");
   };
 
   const [marks, setMarks] = useState<any>("");

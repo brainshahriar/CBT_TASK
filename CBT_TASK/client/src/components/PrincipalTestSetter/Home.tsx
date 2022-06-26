@@ -50,8 +50,6 @@ const Home: React.FC = () => {
   };
   console.log(setValue);
 
-
-
   const handleSubmit = (e: any) => {
     e.preventDefault();
 
@@ -77,36 +75,31 @@ const Home: React.FC = () => {
           <div className="col-12 row">
             <div className="col-6 mt-2">
               <form onSubmit={handleSubmit}>
-                <div className="addtable">
-                  <h3 className="">Added Set</h3>
-                  <table className="table tableclass">
-                    <thead>
-                      <tr className="table-dark">
-                        <th scope="col">id</th>
-                        <th scope="col">Title</th>
-                        <th scope="col">Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {addedSet &&
-                        addedSet.map((element: any, id: any) => {
-                          return (
-                            <tr key={id}>
-                              <td>{id + 1}</td>
-                              <td>{element.name}</td>
-                              <td>
-                                <a
-                                  className="btn btn-sm btn-danger"
-                                  // onClick={() => removeArray(i)}
-                                >
-                                  Remove
-                                </a>
-                              </td>
-                            </tr>
-                          );
-                        })}
-                    </tbody>
-                  </table>
+                <div className="card" style={{ width: "18rem" }}>
+                  <div className="card-body">
+                    {addedSet &&
+                      addedSet.map((element: any, id: any) => {
+                        return (
+                          <div key={id}>
+                            <h5 className="card-title">
+                              Name : {element.name}
+                            </h5>
+                            <h6 className="card-subtitle mb-2 text-muted">
+                              Technology : {element.technology}
+                            </h6>
+                            <h6 className="card-subtitle mb-2 text-muted">
+                              Job Rank : {element.job_rank}
+                            </h6>
+                            <h6 className="card-subtitle mb-2 text-muted">
+                              Difficulty : {element.difficulty}
+                            </h6>
+                            <h6 className="card-subtitle mb-2 text-muted">
+                              Number of Questions : {element.difficulty}
+                            </h6>
+                          </div>
+                        );
+                      })}
+                  </div>
                 </div>
                 <button type="submit" className="btn btn-sm btn-primary m-2">
                   Submit
@@ -115,13 +108,16 @@ const Home: React.FC = () => {
             </div>
 
             <div className="col-6" style={{ marginTop: "12px" }}>
-              <h3>All Set</h3>
+              <h3>All Sets</h3>
               <div className="table-responsive">
                 <table className="table tableclass">
                   <thead>
                     <tr className="table-dark">
                       <th scope="col">SL.</th>
                       <th scope="col">Title</th>
+                      <th scope="col">Status</th>
+                      <th scope="col">Technology</th>
+                      <th scope="col">Difficulty</th>
                       <th scope="col">Action</th>
                     </tr>
                   </thead>
@@ -132,6 +128,9 @@ const Home: React.FC = () => {
                           <tr key={id}>
                             <td>{id + 1}</td>
                             <td>{element.name}</td>
+                            <td>{element.status ? "Active" : "Inactive"}</td>
+                            <td>{element.technology}</td>
+                            <td>{element.difficulty}</td>
                             <td>
                               <button
                                 className="btn-success btn btn-sm"
@@ -156,6 +155,8 @@ const Home: React.FC = () => {
                     <tr className="table-dark">
                       <th scope="col">SL.</th>
                       <th scope="col">Title</th>
+                      <th scope="col">Technology</th>
+                      <th scope="col">Difficulty</th>
                       <th scope="col">Action</th>
                     </tr>
                   </thead>
@@ -166,6 +167,8 @@ const Home: React.FC = () => {
                           <tr key={id}>
                             <td>{id + 1}</td>
                             <td>{element.name}</td>
+                            <td>{element.technology}</td>
+                            <td>{element.difficulty}</td>
                             <td>
                               <button
                                 className="btn-success btn btn-sm"

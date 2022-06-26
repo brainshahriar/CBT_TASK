@@ -132,7 +132,7 @@ const CreateQuestionSet: React.FC = () => {
     };
     createTable();
     alert("Inserted");
-    navigate("/home");
+    navigate("/principaltestsetter");
   };
 
   const [marks, setMarks] = useState<any>("");
@@ -377,9 +377,10 @@ const CreateQuestionSet: React.FC = () => {
                     <table className="table tableclass">
                       <thead>
                         <tr className="table-dark">
-                          <th scope="col">id</th>
+                          <th scope="col">SL.</th>
                           <th scope="col">Title</th>
-                          <th scope="col">From Question Bank</th>
+                          <th scope="col">Technology</th>
+                          <th scope="col">From Q.Bank</th>
                           <th scope="col">Action</th>
                         </tr>
                       </thead>
@@ -390,6 +391,7 @@ const CreateQuestionSet: React.FC = () => {
                               <tr key={id}>
                                 <td scope="row">{id + 1}</td>
                                 <td>{element.question_body}</td>
+                                <td>{element.technology}</td>
                                 <td>
                                   {element.isFromQuestionBank ? "Yes" : "No"}
                                 </td>

@@ -1,9 +1,11 @@
-import React, { useState } from "react";
-import {useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import {useNavigate, useParams } from "react-router-dom";
 import Navbar from "../Navbar";
 import axios from "axios";
 
 const EditQuestions: React.FC = () => {
+
+  let { id } = useParams();
   let navigate = useNavigate();
 
   const [postValue, setValue] = useState<any>({
@@ -32,9 +34,26 @@ const EditQuestions: React.FC = () => {
     setOptionValue(newOptions);
   };
 
+
+  const [defaultData, setDefaultData] = useState<any>({});
+
+  const getData = async (questionId:any) => {
+    await axios
+      .get(`http://localhost:8000/api/question/getall/${questionId}`)
+      .then((result) => {
+        setDefaultData(result.data.result);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  useEffect(() => {
+    getData(id);
+  }, [id]);
+
   const handleData = (e: any) => {
     const { name, value } = e.target;
-    setValue((val: any) => {
+    setValue((val:any) => {
       return {
         ...val,
         [name]: value,
@@ -45,24 +64,22 @@ const EditQuestions: React.FC = () => {
   const handleSubmit = (e: any) => {
     e.preventDefault();
     const data: any = {
-      technology: postValue.technology,
-      question_type: postValue.question_type,
-      job_rank: postValue.job_rank,
-      difficulty: postValue.difficulty,
-      question_body: postValue.question_body,
-      remarks: postValue.remarks,
-      answer: postValue.answer,
-      options: optionValue,
+      question_body: (postValue.question_body ? postValue.question_body : undefined),
+      answer: (postValue.answer ? postValue.answer : undefined),
+      remarks: (postValue.remarks ? postValue.remarks : undefined),
+      question_type: (postValue.question_type ? postValue.requestion_type : undefined),
+      job_rank: (postValue.job_rank ? postValue.job_rank : undefined),
+      difficulty: (postValue.difficulty ? postValue.difficulty : undefined),
+      technology: (postValue.technology ? postValue.technology : undefined),
+      options: (optionValue ? optionValue : undefined),
     };
-
     const createTable = async () => {
-      await axios.post("http://localhost:8000/api/question/post", data);
+      await axios.put(`http://localhost:8000/api/question/update/${id}`,data);
     };
     createTable();
-    alert("Inserted");
+    alert("Updated");
     navigate("/home");
   };
-
   return (
     <>
       <div className=""> 
@@ -131,6 +148,7 @@ const EditQuestions: React.FC = () => {
               <div className="mb-2 col-lg-4 col-md-4 col-12">
                 <label className="form-label">Remarks</label>
                 <input
+                  defaultValue={defaultData && defaultData.remarks}
                   type="text"
                   name="remarks"
                   className="form-control"
@@ -141,6 +159,7 @@ const EditQuestions: React.FC = () => {
               <div className="mb-2 col-lg-6 col-md-6 col-12">
                 <label className="form-label">Question Title</label>
                 <textarea
+                  defaultValue={defaultData && defaultData.question_body}
                   name="question_body"
                   className="form-control"
                   onChange={handleData}
@@ -152,6 +171,7 @@ const EditQuestions: React.FC = () => {
               <div className="mb-2 col-lg-6 col-md-6 col-12">
                 <label className="form-label">Answer</label>
                 <input
+                   defaultValue={defaultData && defaultData.answer}
                   name="answer"
                   className="form-control"
                   onChange={handleData}

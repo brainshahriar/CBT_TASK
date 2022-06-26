@@ -3,7 +3,7 @@ import PartialSet from "./PartialInterface";
 
 const partialSchema = new mongoose.Schema({
         name: { type: String},
-        status:{ type:Boolean,default:true},
+        status:{ type:Boolean,default:false},
         technology: { type: String },
         job_rank: { type: String },
         difficulty: { type: String },
