@@ -9,7 +9,7 @@ const JobRank:React.FC = () => {
   
     return (
   <>
-        <Button variant="primary" onClick={handleShow}>
+        <Button variant="primary btn-sm" onClick={handleShow}>
         Create Job Rank
       </Button>
 

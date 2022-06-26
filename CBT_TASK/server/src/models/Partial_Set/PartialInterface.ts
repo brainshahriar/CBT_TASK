@@ -7,5 +7,6 @@ export default interface PartialSet extends Document{
     technology:string,
     job_rank:string,
     difficulty:string,
+    numOfQuestion:string,
     questions:[Question];
 }

@@ -75,11 +75,11 @@ const Home: React.FC = () => {
           <div className="col-12 row">
             <div className="col-6 mt-2">
               <form onSubmit={handleSubmit}>
-                <div className="card" style={{ width: "18rem" }}>
-                  <div className="card-body">
-                    {addedSet &&
-                      addedSet.map((element: any, id: any) => {
-                        return (
+                {addedSet &&
+                  addedSet.map((element: any, id: any) => {
+                    return (
+                      <div className="card" style={{ width: "20rem" }}>
+                        <div className="card-body">
                           <div key={id}>
                             <h5 className="card-title">
                               Name : {element.name}
@@ -94,20 +94,63 @@ const Home: React.FC = () => {
                               Difficulty : {element.difficulty}
                             </h6>
                             <h6 className="card-subtitle mb-2 text-muted">
-                              Number of Questions : {element.difficulty}
+                              Number of Questions : {element.numOfQuestion}
                             </h6>
                           </div>
-                        );
-                      })}
-                  </div>
-                </div>
-                <button type="submit" className="btn btn-sm btn-primary m-2">
-                  Submit
-                </button>
+                        </div>
+                        <button
+                          type="submit"
+                          className="btn btn-sm btn-primary m-2"
+                        >
+                          Submit
+                        </button>
+                      </div>
+                    );
+                  })}
               </form>
+
+              <div className="col-12">
+                <h3>All Partial Sets</h3>
+                <div className="table-responsive">
+                  <table className="table tableclass">
+                    <thead>
+                      <tr className="table-dark">
+                        <th scope="col">SL.</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Technology</th>
+                        <th scope="col">Difficulty</th>
+                        <th scope="col">Total Question</th>
+                        <th scope="col">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {partialuserData &&
+                        partialuserData.map((element, id) => {
+                          return (
+                            <tr key={id}>
+                              <td>{id + 1}</td>
+                              <td>{element.name}</td>
+                              <td>{element.technology}</td>
+                              <td>{element.difficulty}</td>
+                              <td>{element.numOfQuestion}</td>
+                              <td>
+                                <button
+                                  className="btn-success btn btn-sm"
+                                  onClick={() => handleSet(element)}
+                                >
+                                  Add
+                                </button>
+                              </td>
+                            </tr>
+                          );
+                        })}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
             </div>
 
-            <div className="col-6" style={{ marginTop: "12px" }}>
+            <div className="col-6">
               <h3>All Sets</h3>
               <div className="table-responsive">
                 <table className="table tableclass">
@@ -118,6 +161,7 @@ const Home: React.FC = () => {
                       <th scope="col">Status</th>
                       <th scope="col">Technology</th>
                       <th scope="col">Difficulty</th>
+                      <th scope="col">Total Question</th>
                       <th scope="col">Action</th>
                     </tr>
                   </thead>
@@ -131,44 +175,7 @@ const Home: React.FC = () => {
                             <td>{element.status ? "Active" : "Inactive"}</td>
                             <td>{element.technology}</td>
                             <td>{element.difficulty}</td>
-                            <td>
-                              <button
-                                className="btn-success btn btn-sm"
-                                onClick={() => handleSet(element)}
-                              >
-                                Add
-                              </button>
-                            </td>
-                          </tr>
-                        );
-                      })}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-
-            <div className="col-6" style={{ marginTop: "12px" }}>
-              <h3>All Partial Sets</h3>
-              <div className="table-responsive">
-                <table className="table tableclass">
-                  <thead>
-                    <tr className="table-dark">
-                      <th scope="col">SL.</th>
-                      <th scope="col">Title</th>
-                      <th scope="col">Technology</th>
-                      <th scope="col">Difficulty</th>
-                      <th scope="col">Action</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {partialuserData &&
-                      partialuserData.map((element, id) => {
-                        return (
-                          <tr key={id}>
-                            <td>{id + 1}</td>
-                            <td>{element.name}</td>
-                            <td>{element.technology}</td>
-                            <td>{element.difficulty}</td>
+                            <td>{element.numOfQuestion}</td>
                             <td>
                               <button
                                 className="btn-success btn btn-sm"

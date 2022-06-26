@@ -4,9 +4,8 @@ import Navbar from "../Navbar";
 import { Button, Modal } from "react-bootstrap";
 import axios from "axios";
 
-const CreateQuestionSet:React.FC = () => {
-
-    const [bankData, setbankData] = useState<any[]>([]);
+const CreateQuestionSet: React.FC = () => {
+  const [bankData, setbankData] = useState<any[]>([]);
 
   const [selectedData, setSelectedData] = useState<any>("all");
 
@@ -41,6 +40,7 @@ const CreateQuestionSet:React.FC = () => {
     technology: "",
     job_rank: "",
     difficulty: "",
+    numOfQuestion:""
   });
 
   const [questionValue, setQuestionValue] = useState<any>({
@@ -100,7 +100,7 @@ const CreateQuestionSet:React.FC = () => {
     const newQuestion = { ...questionValue };
     newQuestion.options = optionValue;
     setQuestionArray([...questionArray, newQuestion]);
-    setQuestionValue({ 
+    setQuestionValue({
       technology: "",
       question_type: "",
       job_rank: "",
@@ -123,6 +123,7 @@ const CreateQuestionSet:React.FC = () => {
       technology: postValue.technology,
       job_rank: postValue.job_rank,
       difficulty: postValue.difficulty,
+      numOfQuestion:questionArray.length,
       questions: questionArray,
     };
 
@@ -154,9 +155,9 @@ const CreateQuestionSet:React.FC = () => {
     //   console.log(newQuesArr);
     setQuestionArray(newQuesArr);
   };
-    return (
-            <>
-                  <div className="main">
+  return (
+    <>
+      <div className="main">
         <Navbar />
         <div className="content">
           <div className="col-12 row">
@@ -326,28 +327,31 @@ const CreateQuestionSet:React.FC = () => {
                         </div>
                       </div>
                       <div className="col-12 row">
-              <div className="d-flex optiondiv col-6">
-                {optionDiv.map((item: any, i: any) => (
-                  <div key={i} className="mb-2 col-lg-12 col-md-12 col-12">
-                    <label className="form-label">Options</label>
-                    <input
-                      type="text"
-                      name="options"
-                      className="form-control"
-                      onChange={(e) => handleOptionChange(e, i)}
-                    />
-                  </div>
-                ))}
-              </div>
-              <div className="col-6" style={{ marginTop: "32px" }}>
-                <p
-                  className="btn btn-primary float-right"
-                  onClick={handleClick}
-                >
-                  Add Options
-                </p>
-              </div>
-            </div>
+                        <div className="d-flex optiondiv col-6">
+                          {optionDiv.map((item: any, i: any) => (
+                            <div
+                              key={i}
+                              className="mb-2 col-lg-12 col-md-12 col-12"
+                            >
+                              <label className="form-label">Options</label>
+                              <input
+                                type="text"
+                                name="options"
+                                className="form-control"
+                                onChange={(e) => handleOptionChange(e, i)}
+                              />
+                            </div>
+                          ))}
+                        </div>
+                        <div className="col-6" style={{ marginTop: "32px" }}>
+                          <p
+                            className="btn btn-primary float-right"
+                            onClick={handleClick}
+                          >
+                            Add Options
+                          </p>
+                        </div>
+                      </div>
                     </Modal.Body>
                     <Modal.Footer>
                       <Button variant="secondary" onClick={handleClose}>
@@ -418,7 +422,6 @@ const CreateQuestionSet:React.FC = () => {
               </div>
             </div>
 
-
             <div className="col-6 mt-2">
               <div className="select mb-2">
                 <div>
@@ -488,14 +491,11 @@ const CreateQuestionSet:React.FC = () => {
                 </table>
               </div>
             </div>
-
-            
           </div>
-
         </div>
       </div>
-            </>
-    );
+    </>
+  );
 };
 
 export default CreateQuestionSet;

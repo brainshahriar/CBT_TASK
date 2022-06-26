@@ -42,6 +42,7 @@ const CreateQuestionSet: React.FC = () => {
     technology: "",
     job_rank: "",
     difficulty: "",
+    numOfQuestion:""
   });
 
   const [questionValue, setQuestionValue] = useState<any>({
@@ -124,6 +125,7 @@ const CreateQuestionSet: React.FC = () => {
       technology: postValue.technology,
       job_rank: postValue.job_rank,
       difficulty: postValue.difficulty,
+      numOfQuestion:questionArray.length,
       questions: questionArray,
     };
 

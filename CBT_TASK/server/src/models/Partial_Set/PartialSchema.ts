@@ -7,6 +7,7 @@ const partialSchema = new mongoose.Schema({
         technology: { type: String },
         job_rank: { type: String },
         difficulty: { type: String },
+        numOfQuestion:{type:String},
         questions:[
             {
                 bank_id:{

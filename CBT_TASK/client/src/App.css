@@ -46,7 +46,9 @@ align-items: center;
   border: 1px solid black;
   padding: 5px;
 }
-
+.center{
+  justify-content: center;
+}
 .add_btn {
   margin-left: 5px;
 }

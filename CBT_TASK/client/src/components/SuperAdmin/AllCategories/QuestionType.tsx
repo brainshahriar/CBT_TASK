@@ -9,7 +9,7 @@ const QuestionType:React.FC = () => {
   
     return (
   <>
-        <Button variant="primary" onClick={handleShow}>
+        <Button variant="primary btn-sm" onClick={handleShow}>
         Create Question Type
       </Button>
 
