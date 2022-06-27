@@ -1,11 +1,8 @@
 # CBT_TASK
-
-1.Go to client folder and run in command shell "npm install" (Frontend)
-2.After finish npm install then run in command shell "npm start".(it will automatic open in your browser port http://localhost:3000/) (Frontend)
-3.Go to server folder and run in command shell "npm run dev" for start backend server in port (http://localhost:8000/api) (Backend)
-4.DB configuration generate automatically in your local MongoDB.You can see your database with name: Cbt_Question 
-in your mongdb connect port (mongodb://localhost:27017) at MongoDB compass (DB Setup )
-
-
-Frontend : npm start
-Backend : npm run dev
+1. Installation command . ex - npm install
+2. Project run command and configuration command . ex -npm start
+3. DB setup or configuration command if need else Mention that it will generate automatically.
+4. Each projects should have respective .lock file.
+5. The git procedure : How to get source and run the project at a time.
+*Note: I have checked some of your task.
+I am very upset . Please check again all of your project run able  according to given read me instruction. *
