@@ -24,7 +24,6 @@ const Home: React.FC = () => {
   const [userData, setuserData] = useState<any[]>([]);
 
   const [selectedData, setSelectedData] = useState<any>("all");
-  console.log(selectedData);
   
 
   const getData = async () => {
@@ -105,7 +104,7 @@ const Home: React.FC = () => {
                 </thead>
                 <tbody>
                   {userData &&
-                    userData.map((element, id) => {
+                    userData.map((element:any, id:any) => {
                       return (
                         <tr key={id}>
                           <td scope="row">{id + 1}</td>

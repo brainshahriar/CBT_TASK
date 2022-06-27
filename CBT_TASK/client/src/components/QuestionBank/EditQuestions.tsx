@@ -5,6 +5,21 @@ import axios from "axios";
 
 const EditQuestions: React.FC = () => {
 
+  const [technologyData, setTechnologyData] = useState<any>('');
+  const getTechnology = async () => {
+    await axios
+      .get("http://localhost:8000/api/admin/technology/getall")
+      .then((result) => {
+        setTechnologyData(result.data.result);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
+  useEffect(() => {
+    getTechnology();
+  }, []);
+
   let { id } = useParams();
   let navigate = useNavigate();
 
@@ -87,7 +102,7 @@ const EditQuestions: React.FC = () => {
         <div className="container">
           <form className="mt-4" id="myform" onSubmit={handleSubmit}>
             <div className="row">
-              <div className="mb-2 col-lg-4 col-md-4 col-12">
+            <div className="mb-2 col-lg-4 col-md-4 col-12">
                 <label className="form-label">Technology</label>
                 <select
                   className="form-select"
@@ -95,11 +110,13 @@ const EditQuestions: React.FC = () => {
                   onChange={handleData}
                 >
                   <option selected>Open this select menu</option>
-                  <option value="react">React</option>
-                  <option value="php">Php</option>
-                  <option value="nodejs">NodeJs</option>
-                  <option value="java">Java</option>
-                  <option value="ios">iOS</option>
+                  {
+                    technologyData && technologyData.map((element:any,id:any)=>{
+                      return(
+                        <option key={id} value={element._id}>{element.title}</option>
+                      )
+                    })
+                  }  
                 </select>
               </div>
               <div className="mb-2 col-lg-4 col-md-4 col-12">
