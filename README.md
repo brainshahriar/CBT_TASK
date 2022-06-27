@@ -6,6 +6,6 @@
 in your mongdb connect port (mongodb://localhost:27017) at MongoDB compass (DB Setup )
 
 *Note:
-Frontend : npm start
-Backend : npm run dev
+1.Frontend : npm start
+2.Backend : npm run dev
 *
