@@ -14,10 +14,12 @@ class questionController {
   static gellAllQuestion = async (req: Request, res: Response) => {
     try {
       let questions;
+      
       const { technology } = req.query;
       if (technology === "all") {
         questions = await questionService.getAllQuestion();
-      } else {
+      } 
+      else {
         questions = await questionService.getAllQuestionWithQuery(req.query);
       }
       if (!questions) {

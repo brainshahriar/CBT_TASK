@@ -4,9 +4,28 @@ import Navbar from "./Navbar";
 import axios from "axios";
 
 const Home: React.FC = () => {
+
+  const [technologyData, setTechnologyData] = useState<any>('');
+  const getTechnology = async () => {
+    await axios
+      .get("http://localhost:8000/api/admin/technology/getall")
+      .then((result) => {
+        setTechnologyData(result.data.result);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
+  useEffect(() => {
+    getTechnology();
+  }, []);
+
+
   const [userData, setuserData] = useState<any[]>([]);
 
   const [selectedData, setSelectedData] = useState<any>("all");
+  console.log(selectedData);
+  
 
   const getData = async () => {
     await axios
@@ -53,18 +72,21 @@ const Home: React.FC = () => {
                 <h3>All Questions</h3>
               </div>
               <div>
-                <select
+              <select
                   className="form-select"
+                  name="technology"
                   onChange={(e: any) => setSelectedData(e.target.value)}
                 >
                   <option selected value="all">
                     All
                   </option>
-                  <option value="react">React</option>
-                  <option value="php">Php</option>
-                  <option value="nodejs">NodeJs</option>
-                  <option value="java">Java</option>
-                  <option value="ios">iOS</option>
+                  {
+                    technologyData && technologyData.map((element:any,id:any)=>{
+                      return(
+                        <option  key={id} value={element._id}>{element.title}</option>
+                      )
+                    })
+                  }  
                 </select>
               </div>
             </div>
@@ -88,7 +110,7 @@ const Home: React.FC = () => {
                         <tr key={id}>
                           <td scope="row">{id + 1}</td>
                           <td>{element.question_body}</td>
-                          <td>{element.technology}</td>
+                          <td>{element.technology.title}</td>
                           <td>{element.difficulty}</td>
                           <td>{element.job_rank}</td>
                           <td>

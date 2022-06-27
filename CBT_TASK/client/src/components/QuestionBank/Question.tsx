@@ -1,10 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {useNavigate } from "react-router-dom";
 import Navbar from "../Navbar";
 import axios from "axios";
 
 const Question: React.FC = () => {
   let navigate = useNavigate();
+
+
+  const [technologyData, setTechnologyData] = useState<any>('');
+  const getData = async () => {
+    await axios
+      .get("http://localhost:8000/api/admin/technology/getall")
+      .then((result) => {
+        setTechnologyData(result.data.result);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
+  useEffect(() => {
+    getData();
+  }, []);
+  
 
   const [postValue, setValue] = useState<any>({
     technology: "",
@@ -78,11 +95,13 @@ const Question: React.FC = () => {
                   onChange={handleData}
                 >
                   <option selected>Open this select menu</option>
-                  <option value="react">React</option>
-                  <option value="php">Php</option>
-                  <option value="nodejs">NodeJs</option>
-                  <option value="java">Java</option>
-                  <option value="ios">iOS</option>
+                  {
+                    technologyData && technologyData.map((element:any,id:any)=>{
+                      return(
+                        <option key={id} value={element._id}>{element.title}</option>
+                      )
+                    })
+                  }  
                 </select>
               </div>
               <div className="mb-2 col-lg-4 col-md-4 col-12">

@@ -5,6 +5,20 @@ import { Button, Modal } from "react-bootstrap";
 import axios from "axios";
 
 const CreateQuestionSet: React.FC = () => {
+  const [technologyData, setTechnologyData] = useState<any>("");
+  const getTechnology = async () => {
+    await axios
+      .get("http://localhost:8000/api/admin/technology/getall")
+      .then((result) => {
+        setTechnologyData(result.data.result);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
+  useEffect(() => {
+    getTechnology();
+  }, []);
   const [bankData, setbankData] = useState<any[]>([]);
 
   const [selectedData, setSelectedData] = useState<any>("all");
@@ -38,9 +52,9 @@ const CreateQuestionSet: React.FC = () => {
   const [postValue, setValue] = useState<any>({
     name: "",
     technology: "",
-    job_rank: "", 
+    job_rank: "",
     difficulty: "",
-    numOfQuestion:""
+    numOfQuestion: "",
   });
 
   const [questionValue, setQuestionValue] = useState<any>({
@@ -123,7 +137,7 @@ const CreateQuestionSet: React.FC = () => {
       technology: postValue.technology,
       job_rank: postValue.job_rank,
       difficulty: postValue.difficulty,
-      numOfQuestion:questionArray.length,
+      numOfQuestion: questionArray.length,
       questions: questionArray,
     };
 
@@ -430,16 +444,20 @@ const CreateQuestionSet: React.FC = () => {
                 <div>
                   <select
                     className="form-select"
+                    name="technology"
                     onChange={(e: any) => setSelectedData(e.target.value)}
                   >
                     <option selected value="all">
                       All
                     </option>
-                    <option value="react">React</option>
-                    <option value="php">Php</option>
-                    <option value="nodejs">NodeJs</option>
-                    <option value="java">Java</option>
-                    <option value="ios">iOS</option>
+                    {technologyData &&
+                      technologyData.map((element: any, id: any) => {
+                        return (
+                          <option key={id} value={element._id}>
+                            {element.title}
+                          </option>
+                        );
+                      })}
                   </select>
                 </div>
               </div>
@@ -464,7 +482,7 @@ const CreateQuestionSet: React.FC = () => {
                           <tr key={id}>
                             <td scope="row">{id + 1}</td>
                             <td>{element.question_body}</td>
-                            <td>{element.technology}</td>
+                            <td>{element.technology.title}</td>
                             <td>{element.difficulty}</td>
                             <td>{element.job_rank}</td>
                             <td>

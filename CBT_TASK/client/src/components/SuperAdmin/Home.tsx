@@ -8,7 +8,7 @@ import Technology from "./AllCategories/Technology";
 import axios from "axios";
 
 const Home: React.FC = () => {
-  const [technologyData, setTechnologyData] = useState<any[]>([]);
+  const [technologyData, setTechnologyData] = useState<any>('');
   const getData = async () => {
     await axios
       .get("http://localhost:8000/api/admin/technology/getall")

@@ -5,6 +5,20 @@ import { Button, Modal } from "react-bootstrap";
 import axios from "axios";
 
 const CreateQuestionSet: React.FC = () => {
+  const [technologyData, setTechnologyData] = useState<any>("");
+  const getTechnology = async () => {
+    await axios
+      .get("http://localhost:8000/api/admin/technology/getall")
+      .then((result) => {
+        setTechnologyData(result.data.result);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
+  useEffect(() => {
+    getTechnology();
+  }, []);
   //get All Question
 
   const [bankData, setbankData] = useState<any[]>([]);
@@ -42,7 +56,7 @@ const CreateQuestionSet: React.FC = () => {
     technology: "",
     job_rank: "",
     difficulty: "",
-    numOfQuestion:""
+    numOfQuestion: "",
   });
 
   const [questionValue, setQuestionValue] = useState<any>({
@@ -125,7 +139,7 @@ const CreateQuestionSet: React.FC = () => {
       technology: postValue.technology,
       job_rank: postValue.job_rank,
       difficulty: postValue.difficulty,
-      numOfQuestion:questionArray.length,
+      numOfQuestion: questionArray.length,
       questions: questionArray,
     };
 
@@ -329,28 +343,31 @@ const CreateQuestionSet: React.FC = () => {
                         </div>
                       </div>
                       <div className="col-12 row">
-              <div className="d-flex optiondiv col-6">
-                {optionDiv.map((item: any, i: any) => (
-                  <div key={i} className="mb-2 col-lg-12 col-md-12 col-12">
-                    <label className="form-label">Options</label>
-                    <input
-                      type="text"
-                      name="options"
-                      className="form-control"
-                      onChange={(e) => handleOptionChange(e, i)}
-                    />
-                  </div>
-                ))}
-              </div>
-              <div className="col-6" style={{ marginTop: "32px" }}>
-                <p
-                  className="btn btn-primary float-right"
-                  onClick={handleClick}
-                >
-                  Add Options
-                </p>
-              </div>
-            </div>
+                        <div className="d-flex optiondiv col-6">
+                          {optionDiv.map((item: any, i: any) => (
+                            <div
+                              key={i}
+                              className="mb-2 col-lg-12 col-md-12 col-12"
+                            >
+                              <label className="form-label">Options</label>
+                              <input
+                                type="text"
+                                name="options"
+                                className="form-control"
+                                onChange={(e) => handleOptionChange(e, i)}
+                              />
+                            </div>
+                          ))}
+                        </div>
+                        <div className="col-6" style={{ marginTop: "32px" }}>
+                          <p
+                            className="btn btn-primary float-right"
+                            onClick={handleClick}
+                          >
+                            Add Options
+                          </p>
+                        </div>
+                      </div>
                     </Modal.Body>
                     <Modal.Footer>
                       <Button variant="secondary" onClick={handleClose}>
@@ -393,7 +410,7 @@ const CreateQuestionSet: React.FC = () => {
                               <tr key={id}>
                                 <td scope="row">{id + 1}</td>
                                 <td>{element.question_body}</td>
-                                <td>{element.technology}</td>
+                                <td>{element.technology.title}</td>
                                 <td>
                                   {element.isFromQuestionBank ? "Yes" : "No"}
                                 </td>
@@ -431,16 +448,20 @@ const CreateQuestionSet: React.FC = () => {
                 <div>
                   <select
                     className="form-select"
+                    name="technology"
                     onChange={(e: any) => setSelectedData(e.target.value)}
                   >
                     <option selected value="all">
                       All
                     </option>
-                    <option value="react">React</option>
-                    <option value="php">Php</option>
-                    <option value="nodejs">NodeJs</option>
-                    <option value="java">Java</option>
-                    <option value="ios">iOS</option>
+                    {technologyData &&
+                      technologyData.map((element: any, id: any) => {
+                        return (
+                          <option key={id} value={element._id}>
+                            {element.title}
+                          </option>
+                        );
+                      })}
                   </select>
                 </div>
               </div>
@@ -449,7 +470,7 @@ const CreateQuestionSet: React.FC = () => {
                 <table className="table tableclass">
                   <thead>
                     <tr className="table-dark">
-                                 <th scope="col">SL.</th>
+                      <th scope="col">SL.</th>
                       <th scope="col">Title</th>
                       <th scope="col">Tech.</th>
                       <th scope="col">Difficulty</th>
@@ -465,7 +486,7 @@ const CreateQuestionSet: React.FC = () => {
                           <tr key={id}>
                             <td scope="row">{id + 1}</td>
                             <td>{element.question_body}</td>
-                            <td>{element.technology}</td>
+                            <td>{element.technology.title}</td>
                             <td>{element.difficulty}</td>
                             <td>{element.job_rank}</td>
                             <td>
