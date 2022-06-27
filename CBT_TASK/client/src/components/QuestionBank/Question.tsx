@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../Navbar";
 import axios from "axios";
+import { CKEditor } from "ckeditor4-react";
 
 const Question: React.FC = () => {
   const [selectType, setSelectType] = useState<any>("");
@@ -170,42 +171,62 @@ const Question: React.FC = () => {
                   rows={3}
                 ></textarea>
               </div>
-              <div className="mb-2 col-lg-6 col-md-6 col-12"></div>
-              <div className="mb-2 col-lg-6 col-md-6 col-12">
-                  <label className="form-label">Anwser</label>
-                  <input
-                    name="answer"
-                    className="form-control"
+
+              {selectType && selectType === "coding" ? (
+                <div>
+                  <label className="form-label">Answer</label>
+                  <CKEditor
+                    // config={editorConfig}
                     onChange={handleData}
+                    style={{
+                      width: "40vw",
+                      height: "20vw",
+                    }}
                   />
                 </div>
+              ) : (
+                <div>
+                  <div className="mb-2 col-lg-6 col-md-6 col-12"></div>
+                  <div className="mb-2 col-lg-6 col-md-6 col-12">
+                    <label className="form-label">Anwser</label>
+                    <input
+                      name="answer"
+                      className="form-control"
+                      onChange={handleData}
+                    />
+                  </div>
+                </div>
+              )}
 
               {selectType && selectType === "mcq" ? (
-                            <div className="col-12 row">
-                            <div className="d-flex optiondiv col-6">
-                              {optionDiv.map((item: any, i: any) => (
-                                <div key={i} className="mb-2 col-lg-12 col-md-12 col-12">
-                                  <label className="form-label">Options</label>
-                                  <input
-                                    type="text"
-                                    name="options"
-                                    className="form-control"
-                                    onChange={(e) => handleOptionChange(e, i)}
-                                  />
-                                </div>
-                              ))}
-                            </div>
-                            <div className="col-6" style={{ marginTop: "32px" }}>
-                              <p
-                                className="btn btn-primary float-right"
-                                onClick={handleClick}
-                              >
-                                Add Options
-                              </p>
-                            </div>
-                          </div>
-              ) : undefined }
+                <div className="col-12 row">
+                  <div className="d-flex optiondiv col-6">
+                    {optionDiv.map((item: any, i: any) => (
+                      <div key={i} className="mb-2 col-lg-12 col-md-12 col-12">
+                        <label className="form-label">Options</label>
+                        <input
+                          type="text"
+                          name="options"
+                          className="form-control"
+                          onChange={(e) => handleOptionChange(e, i)}
+                        />
+                      </div>
+                    ))}
+                  </div>
+                  <div className="col-6" style={{ marginTop: "32px" }}>
+                    <p
+                      className="btn btn-primary float-right"
+                      onClick={handleClick}
+                    >
+                      Add Options
+                    </p>
+                  </div>
+                </div>
+              ) : undefined}
             </div>
+            <br />
+            <br />
+            <br />
             <button type="submit" className="btn btn-primary">
               Submit
             </button>
