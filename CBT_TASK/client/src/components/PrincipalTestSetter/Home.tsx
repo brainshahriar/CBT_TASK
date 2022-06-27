@@ -58,6 +58,7 @@ const Home: React.FC = () => {
     };
     createTable();
     alert("Inserted");
+    
     getData();
   };
   return (
