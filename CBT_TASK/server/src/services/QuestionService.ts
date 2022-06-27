@@ -7,7 +7,7 @@ class questionService {
     return savePost;
   };
   static getAllQuestion = async () => { 
-    return await questionModel.find({}).exec();
+    return await questionModel.find({}).populate("technology").exec(); 
   };
   static getAllQuestionWithQuery = async(query:any)=>{
     return await questionModel.find(query).exec();

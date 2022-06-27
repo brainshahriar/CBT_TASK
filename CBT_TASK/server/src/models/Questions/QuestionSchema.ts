@@ -3,6 +3,10 @@ import Question from "./QuestionInterface";
 
 const questionSchema = new mongoose.Schema({
   technology: { type: String },
+  // technology:{
+  //   type: mongoose.Types.ObjectId,
+  //   ref:"technology"
+  //   },
   question_type: { type: String },
   job_rank: { type: String },
   difficulty: { type: String },

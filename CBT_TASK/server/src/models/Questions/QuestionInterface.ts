@@ -2,7 +2,7 @@ import { Document } from "mongoose";
 
 export default interface Question extends Document{
     technology:string,
-    question_type:string,
+    question_type:string, 
     job_rank:string,
     difficulty:string,
     isFromQuestionBank:string,

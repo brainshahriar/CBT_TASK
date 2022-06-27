@@ -9,7 +9,7 @@ const Home: React.FC = () => {
   const [addedSet, setAddedSet] = useState<any>("");
 
   const [userData, setuserData] = useState<any[]>([]);
-  const getData = async () => {
+  const getData = async () => { 
     await axios
       .get("http://localhost:8000/api/set/getall")
       .then((result) => {

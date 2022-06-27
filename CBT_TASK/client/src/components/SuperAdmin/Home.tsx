@@ -1,12 +1,39 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "../Navbar";
 import JobPost from "./AllCategories/JobPost";
 import JobRank from "./AllCategories/JobRank";
 import QuestionType from "./AllCategories/QuestionType";
 import Technology from "./AllCategories/Technology";
+import axios from "axios";
 
 const Home: React.FC = () => {
+  const [technologyData, setTechnologyData] = useState<any[]>([]);
+  const getData = async () => {
+    await axios
+      .get("http://localhost:8000/api/admin/technology/getall")
+      .then((result) => {
+        setTechnologyData(result.data.result);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
+  useEffect(() => {
+    getData();
+  }, []);
+
+  const deleteRecord = async (id: any) => {
+    await axios
+      .delete(`http://localhost:8000/api/admin/technology/delete/${id}`)
+      .then((result) => {
+        alert("Deleted");
+      })
+      .catch((error) => {
+        alert(error.message);
+      });
+    getData();
+  };
   return (
     <>
       <div className="main">
@@ -28,12 +55,31 @@ const Home: React.FC = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                  </tr>
+                  {technologyData &&
+                    technologyData.map((element: any, i: any) => {
+                      return (
+                        <tr key={i}>
+                          <th scope="row">{i+1}</th>
+                          <td>{element.title}</td>
+                          <td>{element.description}</td>
+                          <td>
+                            <button
+                              className="btn btn-danger btn-sm"
+                              onClick={() => {
+                                const confirmBox = window.confirm(
+                                  "Do you really want to delete "
+                                );
+                                if (confirmBox === true) {
+                                  deleteRecord(element._id);
+                                }
+                              }}
+                            >
+                              Delete
+                            </button>
+                          </td>
+                        </tr>
+                      );
+                    })}
                 </tbody>
               </table>
             </div>
@@ -45,7 +91,7 @@ const Home: React.FC = () => {
               <table className="table">
                 <thead>
                   <tr>
-                  <th scope="col">SL.</th>
+                    <th scope="col">SL.</th>
                     <th scope="col">Title</th>
                     <th scope="col">Description</th>
                     <th scope="col">Action</th>
@@ -69,7 +115,7 @@ const Home: React.FC = () => {
               <table className="table">
                 <thead>
                   <tr>
-                  <th scope="col">SL.</th>
+                    <th scope="col">SL.</th>
                     <th scope="col">Title</th>
                     <th scope="col">Description</th>
                     <th scope="col">Action</th>
@@ -93,7 +139,7 @@ const Home: React.FC = () => {
               <table className="table">
                 <thead>
                   <tr>
-                  <th scope="col">SL.</th>
+                    <th scope="col">SL.</th>
                     <th scope="col">Title</th>
                     <th scope="col">Description</th>
                     <th scope="col">Action</th>
@@ -104,7 +150,7 @@ const Home: React.FC = () => {
                     <th scope="row">1</th>
                     <td>Mark</td>
                     <td>Otto</td>
-                    <td>@mdo</td>
+                    <td>ddd</td>
                   </tr>
                 </tbody>
               </table>

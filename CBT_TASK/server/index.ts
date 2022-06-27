@@ -5,6 +5,7 @@ import cors from 'cors';
 import connectDB from './config/connectdb'
 import setRoutes from './src/routes/SetRoutes'
 import questionRoutes from './src/routes/QuestionRoutes'
+import adminRoutes from './src/routes/SuperAdminRoutes'
 import bodyParser from 'body-parser'
 
 const app = express()
@@ -28,6 +29,7 @@ connectDB(DATABASE_URL)
 // Load Routes
 app.use("/api/set",setRoutes )
 app.use("/api/question",questionRoutes)
+app.use("/api/admin",adminRoutes)
 
 app.listen(port, () => {
   console.log(`Server listening at http://localhost:${port}`)
