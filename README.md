@@ -5,3 +5,12 @@
 4. DB configuration generate automatically in your local MongoDB.You can see your database with name: Cbt_Question 
 in your mongdb connect port (mongodb://localhost:27017) at MongoDB compass (DB Setup )
 
+# npm start
+
+1.To run frontend
+
+
+# npm run dev
+
+1.To run Backend
+
