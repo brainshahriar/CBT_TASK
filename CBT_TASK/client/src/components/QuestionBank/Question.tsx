@@ -20,7 +20,7 @@ const validate: any = (values: any) => {
   // const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
 
   if (!values.question_body) {
-    errors.question_body = "Email is required";
+    errors.question_body = "Title is required";
   }
   if (!values.answer) {
     errors.answer = "Answer is required";
