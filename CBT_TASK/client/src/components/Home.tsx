@@ -38,6 +38,8 @@ const Home: React.FC = () => {
         console.log(error.message);
       });
   };
+  console.log(userData);
+  
 
   useEffect(() => {
     getData();

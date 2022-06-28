@@ -3,6 +3,43 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "../Navbar";
 import axios from "axios";
 import { CKEditor } from "ckeditor4-react";
+import { Formik } from "formik";
+
+const initialValues = {
+  technology: "",
+  question_type: "",
+  job_rank: "",
+  difficulty: "",
+  question_body: "",
+  remarks: "",
+  answer: "",
+};
+
+const validate: any = (values: any) => {
+  let errors: any = {};
+  // const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+
+  if (!values.question_body) {
+    errors.question_body = "Email is required";
+  }
+  if (!values.answer) {
+    errors.answer = "Answer is required";
+  }
+  if (!values.question_type) {
+    errors.question_type = "Question Type is required";
+  }
+  if (!values.difficulty) {
+    errors.difficulty = "Difficulty is required";
+  }
+  if (!values.job_rank) {
+    errors.job_rank = "Job Rank is required";
+  }
+  if (!values.technology) {
+    errors.technology = "Technology is required";
+  }
+
+  return errors;
+};
 
 const Question: React.FC = () => {
   const [selectType, setSelectType] = useState<any>("");
@@ -25,16 +62,6 @@ const Question: React.FC = () => {
     getData();
   }, []);
 
-  const [postValue, setValue] = useState<any>({
-    technology: "",
-    question_type: "",
-    job_rank: "",
-    difficulty: "",
-    question_body: "",
-    remarks: "",
-    answer: "",
-  });
-
   const [optionDiv, setOptionDiv] = useState<any>([
     {
       options: "",
@@ -51,28 +78,19 @@ const Question: React.FC = () => {
     setOptionValue(newOptions);
   };
 
-  const handleData = (e: any) => {
-    const { name, value } = e.target;
-    setValue((val: any) => {
-      return {
-        ...val,
-        [name]: value,
-      };
-    });
-  };
-
-  const handleSubmit = (e: any) => {
-    e.preventDefault();
+  const handleSubmits = (values: any) => {
+    // e.preventDefault();
     const data: any = {
-      technology: postValue.technology,
-      question_type: postValue.question_type,
-      job_rank: postValue.job_rank,
-      difficulty: postValue.difficulty,
-      question_body: postValue.question_body,
-      remarks: postValue.remarks,
-      answer: postValue.answer,
+      technology: values.technology,
+      question_type: values.question_type,
+      job_rank: values.job_rank,
+      difficulty: values.difficulty,
+      question_body: values.question_body,
+      remarks: values.remarks,
+      answer: values.answer,
       options: optionValue,
     };
+    console.log(data);
 
     const createTable = async () => {
       await axios.post("http://localhost:8000/api/question/post", data);
@@ -83,157 +101,219 @@ const Question: React.FC = () => {
   };
 
   return (
-    <>
-      <div className="">
-        <Navbar />
-        <div className="container">
-          <form className="mt-4" id="myform" onSubmit={handleSubmit}>
-            <div className="row">
-              <div className="mb-2 col-lg-4 col-md-4 col-12">
-                <label className="form-label">Technology</label>
-                <select
-                  className="form-select"
-                  name="technology"
-                  onChange={handleData}
-                >
-                  <option selected>Open this select menu</option>
-                  {technologyData &&
-                    technologyData.map((element: any, id: any) => {
-                      return (
-                        <option key={id} value={element._id}>
-                          {element.title}
-                        </option>
-                      );
-                    })}
-                </select>
-              </div>
-              <div className="mb-2 col-lg-4 col-md-4 col-12">
-                <label className="form-label">Question Type</label>
-                <select
-                  className="form-select"
-                  name="question_type"
-                  // onChange={handleData}
-                  onChange={(e: any) => setSelectType(e.target.value)}
-                >
-                  <option selected>Open this select menu</option>
-                  <option value="mcq">MCQ</option>
-                  <option value="coding">Coding</option>
-                  <option value="text">Text</option>
-                  <option value="drawing">Drawing</option>
-                  <option value="uml">UML</option>
-                  <option value="video">Video</option>
-                </select>
-              </div>
-              <div className="mb-2 col-lg-4 col-md-4 col-12">
-                <label className="form-label">Job Rank</label>
-                <select
-                  className="form-select"
-                  name="job_rank"
-                  onChange={handleData}
-                >
-                  <option selected>Open this select menu</option>
-                  <option value="4a">4A</option>
-                  <option value="6a">6A</option>
-                  <option value="7c">7C</option>
-                </select>
-              </div>
-              <div className="mb-2 col-lg-4 col-md-4 col-12">
-                <label className="form-label">Difficulty</label>
-                <select
-                  className="form-select"
-                  name="difficulty"
-                  onChange={handleData}
-                  required
-                >
-                  <option selected>Open this select menu</option>
-                  <option value="easy">Easy</option>
-                  <option value="medium">Medium</option>
-                  <option value="hard">Hard</option>
-                </select>
-              </div>
-              <div className="mb-2 col-lg-4 col-md-4 col-12">
-                <label className="form-label">Remarks</label>
-                <input
-                  type="text"
-                  name="remarks"
-                  className="form-control"
-                  onChange={handleData}
-                />
-              </div>
+    <Formik
+      initialValues={initialValues}
+      validate={validate}
+      onSubmit={handleSubmits}
+    >
+      {(formik) => {
+        const {
+          values,
+          handleChange,
+          handleSubmit,
+          errors,
+          touched,
+          handleBlur,
+          isValid,
+          dirty,
+        } = formik;
+        return (
+          <div className="">
+            <Navbar />
+            <div className="container">
+              <form className="mt-4" id="myform" onSubmit={handleSubmit}>
+                <div className="row">
+                  <div className="mb-2 col-lg-4 col-md-4 col-12">
+                    <label className="form-label">Technology</label>
+                    <select
+                      className="form-select"
+                      name="technology"
+                      onChange={handleChange}
+                      value={values.technology}
+                      onBlur={handleBlur}
+                    >
+                      <option selected>Open this select menu</option>
+                      {technologyData &&
+                        technologyData.map((element: any, id: any) => {
+                          return (
+                            <option key={id} value={element._id}>
+                              {element.title}
+                            </option>
+                          );
+                        })}
+                    </select>
+                    {errors.technology && touched.technology && (
+                      <span className="text-danger">{errors.technology}</span>
+                    )}
+                  </div>
+                  <div className="mb-2 col-lg-4 col-md-4 col-12">
+                    <label className="form-label">Question Type</label>
+                    <select
+                      className="form-select"
+                      name="question_type"
+                      value={values.question_type}
+                      onChange={(e: any) => {
+                        setSelectType(e.target.value);
+                        handleChange(e);
+                      }}
+                      onBlur={handleBlur}
+                    >
+                      <option selected>Open this select menu</option>
+                      <option value="mcq">MCQ</option>
+                      <option value="coding">Coding</option>
+                      <option value="text">Text</option>
+                      <option value="drawing">Drawing</option>
+                      <option value="uml">UML</option>
+                      <option value="video">Video</option>
+                    </select>
+                    {errors.question_type && touched.question_type && (
+                      <span className="text-danger">
+                        {errors.question_type}
+                      </span>
+                    )}
+                  </div>
+                  <div className="mb-2 col-lg-4 col-md-4 col-12">
+                    <label className="form-label">Job Rank</label>
+                    <select
+                      className="form-select"
+                      name="job_rank"
+                      onChange={handleChange}
+                      value={values.job_rank}
+                      onBlur={handleBlur}
+                    >
+                      <option selected>Open this select menu</option>
+                      <option value="4a">4A</option>
+                      <option value="6a">6A</option>
+                      <option value="7c">7C</option>
+                    </select>
+                    {errors.job_rank && touched.job_rank && (
+                      <span className="text-danger">{errors.job_rank}</span>
+                    )}
+                  </div>
+                  <div className="mb-2 col-lg-4 col-md-4 col-12">
+                    <label className="form-label">Difficulty</label>
+                    <select
+                      className="form-select"
+                      name="difficulty"
+                      onChange={handleChange}
+                      value={values.difficulty}
+                      onBlur={handleBlur}
+                    >
+                      <option selected>Open this select menu</option>
+                      <option value="easy">Easy</option>
+                      <option value="medium">Medium</option>
+                      <option value="hard">Hard</option>
+                    </select>
+                    {errors.difficulty && touched.difficulty && (
+                      <span className="text-danger">{errors.difficulty}</span>
+                    )}
+                  </div>
 
-              <div className="mb-2 col-lg-6 col-md-6 col-12">
-                <label className="form-label">Question Title</label>
-                <textarea
-                  name="question_body"
-                  className="form-control"
-                  onChange={handleData}
-                  cols={30}
-                  rows={3}
-                ></textarea>
-              </div>
-
-              {selectType && selectType === "coding" ? (
-                <div>
-                  <label className="form-label">Answer</label>
-                  <CKEditor
-                    // config={editorConfig}
-                    onChange={handleData}
-                    style={{
-                      width: "40vw",
-                      height: "20vw",
-                    }}
-                  />
-                </div>
-              ) : (
-                <div>
-                  <div className="mb-2 col-lg-6 col-md-6 col-12"></div>
-                  <div className="mb-2 col-lg-6 col-md-6 col-12">
-                    <label className="form-label">Anwser</label>
+                  <div className="mb-2 col-lg-4 col-md-4 col-12">
+                    <label className="form-label">Remarks</label>
                     <input
-                      name="answer"
+                      type="text"
+                      name="remarks"
                       className="form-control"
-                      onChange={handleData}
+                      onChange={handleChange}
+                      value={values.remarks}
+                      placeholder="Not required"
                     />
                   </div>
-                </div>
-              )}
 
-              {selectType && selectType === "mcq" ? (
-                <div className="col-12 row">
-                  <div className="d-flex optiondiv col-6">
-                    {optionDiv.map((item: any, i: any) => (
-                      <div key={i} className="mb-2 col-lg-12 col-md-12 col-12">
-                        <label className="form-label">Options</label>
+                  <div className="mb-2 col-lg-6 col-md-6 col-12">
+                    <label className="form-label">Question Title</label>
+                    <textarea
+                      name="question_body"
+                      className="form-control"
+                      onChange={handleChange}
+                      cols={30}
+                      rows={3}
+                      value={values.question_body}
+                      onBlur={handleBlur}
+                    ></textarea>
+                    {errors.question_body && touched.question_body && (
+                      <span className="text-danger">
+                        {errors.question_body}
+                      </span>
+                    )}
+                  </div>
+
+                  {selectType && selectType === "coding" ? (
+                    <div>
+                      <label className="form-label">Answer</label>
+                      <CKEditor
+                        // config={editorConfig}
+                        name="answer"
+                        onChange={handleChange}
+                        value={values.answer}
+                        // onBlur={handleBlur}
+                        style={{
+                          width: "40vw",
+                          height: "20vw",
+                        }}
+                      />
+                    </div>
+                  ) : (
+                    <div>
+                      <div className="mb-2 col-lg-6 col-md-6 col-12"></div>
+                      <div className="mb-2 col-lg-6 col-md-6 col-12">
+                        <label className="form-label">Anwser</label>
                         <input
-                          type="text"
-                          name="options"
+                          name="answer"
                           className="form-control"
-                          onChange={(e) => handleOptionChange(e, i)}
+                          onChange={handleChange}
+                          value={values.answer}
+                          onBlur={handleBlur}
                         />
+                        {errors.answer && touched.answer && (
+                          <span className="text-danger">{errors.answer}</span>
+                        )}
                       </div>
-                    ))}
-                  </div>
-                  <div className="col-6" style={{ marginTop: "32px" }}>
-                    <p
-                      className="btn btn-primary float-right"
-                      onClick={handleClick}
-                    >
-                      Add Options
-                    </p>
-                  </div>
+                    </div>
+                  )}
+
+                  {selectType && selectType === "mcq" ? (
+                    <div className="col-12 row">
+                      <div className="d-flex optiondiv col-6">
+                        {optionDiv.map((item: any, i: any) => (
+                          <div
+                            key={i}
+                            className="mb-2 col-lg-12 col-md-12 col-12"
+                          >
+                            <label className="form-label">Options</label>
+                            <input
+                              type="text"
+                              name="options"
+                              className="form-control"
+                              onChange={(e) => handleOptionChange(e, i)}
+                            />
+                          </div>
+                        ))}
+                      </div>
+                      <div className="col-6" style={{ marginTop: "32px" }}>
+                        <p
+                          className="btn btn-primary float-right"
+                          onClick={handleClick}
+                        >
+                          Add Options
+                        </p>
+                      </div>
+                    </div>
+                  ) : undefined}
                 </div>
-              ) : undefined}
+                <br />
+                <br />
+                <br />
+                <button type="submit" className="btn btn-primary">
+                  Submit
+                </button>
+              </form>
             </div>
-            <br />
-            <br />
-            <br />
-            <button type="submit" className="btn btn-primary">
-              Submit
-            </button>
-          </form>
-        </div>
-      </div>
-    </>
+          </div>
+        );
+      }}
+    </Formik>
   );
 };
 
