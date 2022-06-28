@@ -14,7 +14,7 @@ class setController {
   }
   async get(req: Request, res: Response) {
     try {
-      const sets = await setService.getAllUser();
+      const sets = await setService.getAll();
       if (!sets) {
         return res.send({ status: "Something error" });
       }
@@ -26,39 +26,6 @@ class setController {
       return res.send({ status: "Something error" });
     }
   }
-
-  // async getByid(req: Request, res: Response) {
-  //   try {
-  //     const test = await userService.getById(req, res);
-  //     if (test) {
-  //       return res.send({ result: test });
-  //     } else {
-  //       return res.send({ result: "Not found" });
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //     return res.send({ status: "Something error" });
-  //   }
-  // }
-
-  // async update(req: Request, res: Response) {
-  //   try {
-  //     await userService.updateUser(req, res);
-  //     return res.send({ status: "Updated" });
-  //   } catch (error) {
-  //     console.log(error);
-  //     return res.send({ status: "Error" });
-  //   }
-  // }
-
-  // async delete(req: Request, res: Response) {
-  //   try {
-  //     await userService.delete(req, res);
-  //     return res.send({ status: "Deleted" });
-  //   } catch (error) {
-  //     return res.send({ status: "Error" });
-  //   }
-  // }
 }
 
 export default new setController();

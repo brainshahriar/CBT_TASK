@@ -3,7 +3,6 @@ import partialsetService from "../services/PartialSetService";
 
 class partialsetController {
   async post(req: Request, res: Response) {
-
     try {
       await partialsetService.postSet(req, res);
       return res.send({ status: "Data Inserted" });
@@ -14,7 +13,7 @@ class partialsetController {
   }
   async get(req: Request, res: Response) {
     try {
-      const sets = await partialsetService.getAllUser();
+      const sets = await partialsetService.getAll();
       if (!sets) {
         return res.send({ status: "Something error" });
       }
@@ -26,7 +25,6 @@ class partialsetController {
       return res.send({ status: "Something error" });
     }
   }
-
 }
 
 export default new partialsetController();

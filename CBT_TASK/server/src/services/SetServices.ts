@@ -2,7 +2,7 @@ import setModel from "../models/Question_Set/SetSchema";
 import { Request, Response } from "express"; 
 
 class setService {
-  static getAllUser = async () => {
+  static getAll = async () => {
     return await setModel.find({}).exec();
   };
 

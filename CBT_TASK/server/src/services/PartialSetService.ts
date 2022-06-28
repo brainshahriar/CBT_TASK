@@ -1,8 +1,8 @@
 import partialsetModel from "../models/Partial_Set/PartialSchema";
-import { Request, Response } from "express"; 
+import { Request, Response } from "express";
 
 class partialsetService {
-  static getAllUser = async () => {
+  static getAll = async () => {
     return await partialsetModel.find({}).exec();
   };
 
@@ -12,7 +12,6 @@ class partialsetService {
     });
     return await newPost.save();
   };
-
 }
 
 export default partialsetService;

@@ -26,7 +26,6 @@ class technologyController {
     }
   }
 
-
   async delete(req: Request, res: Response) {
     try {
       await technologyService.delete(req, res);
