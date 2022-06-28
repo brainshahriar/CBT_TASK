@@ -15,7 +15,7 @@ class partialsetController {
     try {
       const sets = await partialsetService.getAll();
       if (!sets) {
-        return res.send({ status: "Something error" });
+        return res.send({ status: "Something Error" });
       }
       res.status(200).json({
         result: sets,
