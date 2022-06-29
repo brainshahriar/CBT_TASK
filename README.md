@@ -6,6 +6,12 @@
 5. DB configuration generate automatically in your local MongoDB.You can see your database with name: Cbt_Question 
 in your mongdb connect port (mongodb://localhost:27017) at MongoDB compass (DB Setup )
 
+# How to check
+
+1. Click to As Super Admin tab then create some technologies
+2. After create technology then click to Home tab and create some question.
+3. After that you can create question set as principal test setter or as sub person
+
 # npm start
 
 1.To run frontend
